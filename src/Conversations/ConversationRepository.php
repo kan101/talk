@@ -195,7 +195,7 @@ class ConversationRepository extends Repository
                             }
                         );
 
-                    $query->offset($offset)->take($take);
+                    $query->latest()->offset($offset)->take($take);
 
                 }
             ]
