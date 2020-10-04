@@ -327,11 +327,11 @@ class Talk
      *
      * @param int $conversationId
      * @param int $offset         = 0
-     * @param int $take           = 20
+     * @param int $take           = 50
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    public function getConversationsById($conversationId, $offset = 0, $take = 20)
+    public function getConversationsById($conversationId, $offset = 0, $take = 50)
     {
         $conversations = $this->conversation->getMessagesById($conversationId, $this->authUserId, $offset, $take);
 
