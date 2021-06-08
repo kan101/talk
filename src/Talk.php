@@ -100,6 +100,8 @@ class Talk
             'user_id' => $this->authUserId,
             'is_seen' => 0,
         ]);
+        
+        //this is a test
 
         $message->conversation->touch();
 
