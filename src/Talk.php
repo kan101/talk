@@ -92,7 +92,7 @@ class Talk
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    protected function makeMessage($conversationId, $message)
+    protected function makeMessage($conversationId, $message, $senderUsername = '')
     {
         $message = $this->message->create([
             'message' => $message,
@@ -100,10 +100,10 @@ class Talk
             'user_id' => $this->authUserId,
             'is_seen' => 0,
         ]);
-        
-        //this is a test
 
         $message->conversation->touch();
+        
+        $message->sender_username = $senderUsername;
 
         $this->broadcast->transmission($message);
 
@@ -258,16 +258,16 @@ class Talk
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    public function sendMessageByUserId($receiverId, $message)
+    public function sendMessageByUserId($receiverId, $message, $senderUsername = '')
     {
         if ($conversationId = $this->isConversationExists($receiverId)) {
-            $message = $this->makeMessage($conversationId, $message);
+            $message = $this->makeMessage($conversationId, $message, $senderUsername);
 
             return $message;
         }
 
         $convId = $this->newConversation($receiverId);
-        $message = $this->makeMessage($convId, $message);
+        $message = $this->makeMessage($convId, $message, $senderUsername);
 
         return $message;
     }
